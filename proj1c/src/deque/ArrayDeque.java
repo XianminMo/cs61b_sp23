@@ -12,16 +12,15 @@ public class ArrayDeque<T> implements Deque<T> {
     private int nextLast;
 
     public static void main(String[] args) {
-        Deque<Integer> ad = new ArrayDeque<>();
-        ad.addFirst(1);
-        ad.addFirst(2);
-        ad.addFirst(3);
-        ad.addLast(4);
-        ad.addLast(5);
-        ad.addLast(6);
-        for (int x : ad) {
-            System.out.print(x + " ");
-        }
+        Deque<Integer> ad1 = new ArrayDeque<>();
+        Deque<Integer> ad2 = new ArrayDeque<>();
+        ad1.addFirst(1);
+        ad1.addFirst(2);
+        ad1.addFirst(3);
+        ad2.addLast(3);
+        ad2.addLast(2);
+        ad2.addLast(1);
+        System.out.println(ad1.equals(ad2));
     }
 
     public ArrayDeque() {
@@ -214,5 +213,39 @@ public class ArrayDeque<T> implements Deque<T> {
     @Override
     public Iterator<T> iterator() {
         return new ArrayDequeIterator();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other instanceof ArrayDeque otherArrayDeque) {
+            if (this.size != otherArrayDeque.size) {
+                return false;
+            }
+            for (T x : this) {
+                if (!otherArrayDeque.contains(x)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
+    private boolean contains(T x) {
+        int i = judgeFirst();
+        while (items[i] != null) {
+            if (items[i] == x) {
+                return true;
+            }
+            if (i == items.length - 1) {
+                i = 0;
+            }else {
+                i += 1;
+            }
+        }
+        return false;
     }
 }

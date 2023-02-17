@@ -6,13 +6,15 @@ import java.util.List;
 
 public class LinkedListDeque<T> implements Deque<T> {
     public static void main(String[] args) {
-        Deque<Integer> lld = new LinkedListDeque<>();
-        lld.addFirst(1);
-        lld.addFirst(2);
-        lld.addLast(3);
-        for (int x : lld) {
-            System.out.print(x + " ");
-        }
+        Deque<Integer> lld1 = new LinkedListDeque<>();
+        Deque<Integer> lld2 = new LinkedListDeque<>();
+        lld1.addFirst(1);
+        lld1.addFirst(2);
+        lld1.addFirst(3);
+        lld2.addLast(3);
+        lld2.addLast(2);
+        lld2.addLast(1);
+        System.out.println(lld1.equals(lld2));
     }
 
     private class LinkedListDequeIterator implements Iterator<T> {
@@ -158,6 +160,36 @@ public class LinkedListDeque<T> implements Deque<T> {
         }
         sentinel = sentinel.next;
         return getRecursive(index - 1);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other instanceof LinkedListDeque otherLinkedListDeque) {
+            if (this.size != otherLinkedListDeque.size) {
+                return false;
+            }
+            for (T x : this) {
+                if (!otherLinkedListDeque.contains(x)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
+    private boolean contains(T x) {
+        TNode i = sentinel.next;
+        while (i != sentinel) {
+            if (i.item == x) {
+                return true;
+            }
+            i = i.next;
+        }
+        return false;
     }
 
 }
