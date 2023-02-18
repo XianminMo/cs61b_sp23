@@ -12,15 +12,15 @@ public class ArrayDeque<T> implements Deque<T> {
     private int nextLast;
 
     public static void main(String[] args) {
-        Deque<Integer> ad1 = new ArrayDeque<>();
+        Deque<String> ad1 = new ArrayDeque<>();
         Deque<Integer> ad2 = new ArrayDeque<>();
-        ad1.addFirst(1);
-        ad1.addFirst(2);
-        ad1.addFirst(3);
+        ad1.addFirst("back");
+        ad1.addFirst("middle");
+        ad1.addFirst("first");
         ad2.addLast(3);
         ad2.addLast(2);
         ad2.addLast(1);
-        System.out.println(ad1.equals(ad2));
+        System.out.println(ad1);
     }
 
     public ArrayDeque() {
@@ -247,5 +247,24 @@ public class ArrayDeque<T> implements Deque<T> {
             }
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder returnSB = new StringBuilder("[");
+        int i = judgeFirst();
+        while (items[i] != null) {
+            returnSB.append(items[i]);
+            if (i == items.length - 1) {
+                i = 0;
+            }else {
+                i += 1;
+            }
+            if (items[i] != null) {
+                returnSB.append(", ");
+            }
+        }
+        returnSB.append("]");
+        return returnSB.toString();
     }
 }

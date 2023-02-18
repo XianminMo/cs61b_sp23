@@ -6,15 +6,15 @@ import java.util.List;
 
 public class LinkedListDeque<T> implements Deque<T> {
     public static void main(String[] args) {
-        Deque<Integer> lld1 = new LinkedListDeque<>();
+        Deque<String> lld1 = new LinkedListDeque<>();
         Deque<Integer> lld2 = new LinkedListDeque<>();
-        lld1.addFirst(1);
-        lld1.addFirst(2);
-        lld1.addFirst(3);
+        lld1.addFirst("back");
+        lld1.addFirst("middle");
+        lld1.addFirst("first");
         lld2.addLast(3);
         lld2.addLast(2);
         lld2.addLast(1);
-        System.out.println(lld1.equals(lld2));
+        System.out.println(lld1);
     }
 
     private class LinkedListDequeIterator implements Iterator<T> {
@@ -190,6 +190,21 @@ public class LinkedListDeque<T> implements Deque<T> {
             i = i.next;
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder returnSB = new StringBuilder("[");
+        TNode i = sentinel.next;
+        while (i != sentinel) {
+            returnSB.append(i.item);
+            i = i.next;
+            if (i != sentinel) {
+                returnSB.append(", ");
+            }
+        }
+        returnSB.append("]");
+        return returnSB.toString();
     }
 
 }
