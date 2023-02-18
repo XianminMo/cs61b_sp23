@@ -70,7 +70,7 @@ public class ArrayDeque<T> implements Deque<T> {
         nextLast = size;
     }
 
-    private int judgeFirst() {
+    public int judgeFirst() {
         int first = 0;
         if (nextFirst == items.length - 1) {
             first = 0;
@@ -81,7 +81,15 @@ public class ArrayDeque<T> implements Deque<T> {
 
     }
 
-    private int judgeLast() {
+    public int judgeNext(int i) {
+        if (i == items.length) {
+            return 0;
+        }else {
+            return i + 1;
+        }
+    }
+
+    public int judgeLast() {
         int last = 0;
         if (nextLast == 0) {
             last = items.length - 1;
